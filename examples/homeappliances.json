@@ -1,0 +1,15 @@
+{
+  "data": {
+    "homeappliances": [
+      {
+        "brand": "Bosch",
+        "connected": true,
+        "enumber": "WGB254031/23",
+        "haId": "485010549379000874",
+        "name": "die Heilige Trommel des Bösen  ",
+        "type": "Washer",
+        "vib": "WGB254031"
+      }
+    ]
+  }
+}
