@@ -1,0 +1,26 @@
+{
+    "data": {
+        "status": [
+            {
+                "key": "BSH.Common.Status.DoorState",
+                "value": "BSH.Common.EnumType.DoorState.Locked"
+            },
+            {
+                "key": "BSH.Common.Status.LocalControlActive",
+                "value": false
+            },
+            {
+                "key": "BSH.Common.Status.OperationState",
+                "value": "BSH.Common.EnumType.OperationState.Run"
+            },
+            {
+                "key": "BSH.Common.Status.RemoteControlActive",
+                "value": true
+            },
+            {
+                "key": "BSH.Common.Status.RemoteControlStartAllowed",
+                "value": true
+            }
+        ]
+    }
+}

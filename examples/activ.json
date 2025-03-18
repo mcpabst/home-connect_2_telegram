@@ -1,0 +1,54 @@
+{
+    "data": {
+        "constraints": {
+            "access": "readWrite"
+        },
+        "key": "LaundryCare.Washer.Program.Cotton.Eco4060",
+        "options": [
+            {
+                "key": "BSH.Common.Option.FinishInRelative",
+                "value": 0,
+                "unit": "seconds"
+            },
+            {
+                "key": "BSH.Common.Option.EstimatedTotalProgramTime",
+                "value": 9660,
+                "unit": "seconds"
+            },
+            {
+                "key": "BSH.Common.Option.RemainingProgramTime",
+                "value": 9660,
+                "unit": "seconds"
+            },
+            {
+                "key": "LaundryCare.Common.Option.SpeedPerfect",
+                "value": false
+            },
+            {
+                "key": "LaundryCare.Washer.Option.RinseHold",
+                "value": false
+            },
+            {
+                "key": "LaundryCare.Washer.Option.SpinSpeed",
+                "value": "LaundryCare.Washer.EnumType.SpinSpeed.RPM1000"
+            },
+            {
+                "key": "LaundryCare.Washer.Option.Temperature",
+                "value": "LaundryCare.Washer.EnumType.Temperature.Auto"
+            },
+            {
+                "key": "BSH.Common.Option.ProgramProgress",
+                "value": 29,
+                "unit": "%"
+            },
+            {
+                "key": "BSH.Common.Option.RemainingProgramTimeIsEstimated",
+                "value": true
+            },
+            {
+                "key": "LaundryCare.Common.Option.ProcessPhase",
+                "value": "LaundryCare.Common.EnumType.ProcessPhase.Washing"
+            }
+        ]
+    }
+}
