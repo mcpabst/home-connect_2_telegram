@@ -1,0 +1,15 @@
+{
+  "data": {
+    "homeappliances": [
+      {
+        "brand": "Bosch",
+        "connected": true,
+        "enumber": "BBBB/23",
+        "haId": "123520505",
+        "name": "KEKSE01",
+        "type": "Washer",
+        "vib": "AB1225"
+      }
+    ]
+  }
+}
