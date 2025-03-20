@@ -3,8 +3,11 @@
 import argparse
 import base64
 import json
-import yaml
+import os
+
 import requests
+import yaml
+
 import example_files
 
 __author__ = 'Markus Pabst'
@@ -193,8 +196,10 @@ def read_config():
     client_id: str
     client_secret: str = ""
 
+    dir_path: str = os.path.join(os.path.dirname(__file__), config_file_name)
+
     # name_client_secret = 'client_secret'
-    with open(config_file_name, 'r') as f:
+    with open(dir_path, 'r') as f:
         config = yaml.safe_load(f)
 
     base_url = config[NAME_BASE_URL]
@@ -227,7 +232,7 @@ def get_washers_json():
     for home_appliance in home_appliances:
         if home_appliance['type'].upper().__eq__("WASHER"):
             values = {'is_connected': home_appliance['connected'],
-                      'connected': bool_to_int(home_appliance['connected'])}
+                      'connected_int': bool_to_int(home_appliance['connected'])}
             washer = home_appliance
             washer['name'] = home_appliance['name'].strip()
             del washer['connected']
@@ -251,11 +256,17 @@ def get_washers_json():
 
 
 if __name__ == '__main__':
-    # parser = argparse.ArgumentParser(description="Process some parameters.")
-    # parser.add_argument('param1', type=str, help='The first parameter')
-    # parser.add_argument('param2', type=str, help='The second parameter')
-    #
-    #
-    # args = parser.parse_args()
+    parser = argparse.ArgumentParser(description="Process some parameters.")
+    parser.add_argument('-t', '--type', type=str, help='device type, with allowed values like: w, washer',
+                        required=True)
     read_config()
-    print(get_washers_json())
+    args = parser.parse_args()
+
+    allowed_types = ['W', 'WASHER']
+
+    if not args.type or not args.type.upper() in allowed_types:
+        err: str = "This device type is not defined yet. Defined types are {}".format(allowed_types)
+        raise ValueError(err)
+
+    if args.type.upper().__eq__('WASHER') or args.type.upper().__eq__('W'):
+        print(get_washers_json())

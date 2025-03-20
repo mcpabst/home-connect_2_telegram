@@ -1,9 +1,22 @@
 # parser form Homeconnect API for Washer for telegraf to influxDB
 
+## goal
+
+The goal here is to collect data from Homeconnect API and show charts in Grafana
+
+```mermaid
+graph LR
+    A --> B --> C --> D --> E;
+    A["<a href='https://www.home-connect.com'>Home Connect</a>"]
+    B["Parser"]
+    C["<a href='https://www.influxdata.com/time-series-platform/telegraf'>telegraf</a>"]
+    D["<a href='https://www.influxdata.com/lp/influxdb-database'>influxDB</a>"]
+    E["<a href='https://grafana.com'>Grafana</a>"]
+```
 ## intro
 
-for using this tool you need `client_id` from your homeconnect developer application
-I use in application settings **device flow** way and the genered `refresh_token`
+For using this tool you need `client_id` from your homeconnect developer application
+I use in application settings **device flow** way and the generated `refresh_token`
 
 For generate the refresh_token please a rest tool like postman and take the following step
 
@@ -23,4 +36,23 @@ base_url: https://api.home-connect.com
 login:
   refresh_token: jujJyZWdpb24iO.....
   client_id: AAF0EA107717AC7E30....
+```
+
+## usage
+
+just call script with:
+
+``python homeconnect_2_telegraf_main.py -t washer``
+
+### in telegraf config
+
+```
+[[inputs.exec]]
+  commands = ["python3.8 path_to_scrip/home-connect_2_telegraf_main -t WASHER"]
+  timeout = "150s"
+  interval = "120s"
+  data_format = "json"
+  name_override = "washer"
+  tag_keys = ["name","mac","location_coordinats_latitude","location_coordinats_longitude","geohash","flower_name","location_country_code","location_country_name","location_city_name","location_room_orientation","location_room_name"]
+  json_string_fields = ["brand", "enumber", "haId", "name", "type", "vib"]
 ```

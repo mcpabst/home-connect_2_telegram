@@ -1,12 +1,12 @@
 import json
 import os
 
-import main
+import homeconnect_2_telegraf_main
 
 
 def read_json_gen(file_name: str):
     dir_path: str = os.path.join(os.path.dirname(__file__), file_name)
-    with open(dir_path, 'r', encoding=main.ENCODING) as f:
+    with open(dir_path, 'r', encoding=homeconnect_2_telegraf_main.ENCODING) as f:
         return json.load(f)
 
 
