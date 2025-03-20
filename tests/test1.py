@@ -42,6 +42,7 @@ class MyTestCase(unittest.TestCase):
     def testAll(self):
         homeconnect_2_telegraf_main.test_intern = True
         washers_json = homeconnect_2_telegraf_main.get_washers_json()
+        print(washers_json)
         di_arr = json.loads(washers_json)
         self.assertEqual(len(di_arr), 1)
         self.assertEqual(di_arr[0]['name'], "KEKSE01")

@@ -63,6 +63,7 @@ def get_header_with_token():
 def get_home_appliances():
     data: dict
     if not test_intern:
+        print(111)
         url = "{}/api/homeappliances".format(base_url)
         response = requests.request("GET", url, headers=get_header_with_token(), data={})
         if response.status_code == 200:
@@ -93,13 +94,13 @@ def get_status(haid: str) -> dict:
     return data["data"]["status"]
 
 
-def is_washer_status_door_open(i_status) -> bool:
+def get_washer_status_door(i_status) -> str:
+    print(i_status)
+    door_status: str = ''
     for pair in i_status:
-        if pair['key'].__eq__('BSH.Common.Status.DoorState') and pair['value'].__eq__(
-                'BSH.Common.EnumType.DoorState.Open'):
-            return True
-        pass
-    return False
+        if pair[NAME_KEY].__eq__('BSH.Common.Status.DoorState'):
+            door_status = pair[NAME_VALUE].split('BSH.Common.EnumType.DoorState.')[1]
+    return door_status
 
 
 def bool_to_int(m_in_bool: bool):
@@ -108,18 +109,17 @@ def bool_to_int(m_in_bool: bool):
     return 0
 
 
-def is_washer_status_active(i_status: dict) -> bool:
+def get_washer_status_active(i_status: dict) -> str:
+    value: str = ''
     for pair in i_status:
-        if pair[NAME_KEY].__eq__('BSH.Common.Status.OperationState') and pair['value'].__eq__(
-                'BSH.Common.EnumType.OperationState.Inactive'):
-            return False
-        pass
-    return True
+        if pair[NAME_KEY].__eq__('BSH.Common.Status.OperationState'):
+            value = pair[NAME_VALUE].split('BSH.Common.EnumType.OperationState.')[1]
+    return value
 
 
 def get_programs_active_info(haid: str):
     data: dict
-    if not test_intern:
+    if test_intern is False:
         url = "{}/api/homeappliances/{}/programs/active".format(base_url, haid)
         response = requests.request("GET", url, headers=get_header_with_token(), data={})
         if response.status_code == 200:
@@ -238,12 +238,11 @@ def get_washers_json():
             del washer['connected']
             haid = get_haid(home_appliance)
             status = get_status(haid)
-            values['door_open_int'] = bool_to_int(is_washer_status_door_open(status))
-            values['is_door_open'] = is_washer_status_door_open(status)
-            values['active_int'] = bool_to_int(is_washer_status_active(status))
-            values['is_active'] = is_washer_status_active(status)
-            values['active_int'] = bool_to_int(is_washer_status_active(status))
-            if is_washer_status_active(status):
+            values['door_status'] = get_washer_status_door(status)
+            active_status: str = get_washer_status_active(status)
+            values['active_status'] = active_status
+
+            if active_status.upper().__eq__("RUN"):
                 active_info: dict = get_programs_active_info(haid)
                 values["programs_active_spin_speed"] = get_washer_programs_active_spin_speed(active_info)
                 values["programs_active_name"] = get_washer_programs_active_name(active_info)

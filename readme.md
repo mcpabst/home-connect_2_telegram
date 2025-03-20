@@ -52,7 +52,7 @@ just call script with:
   timeout = "150s"
   interval = "120s"
   data_format = "json"
-  name_override = "washer"
-  tag_keys = ["name","mac","location_coordinats_latitude","location_coordinats_longitude","geohash","flower_name","location_country_code","location_country_name","location_city_name","location_room_orientation","location_room_name"]
-  json_string_fields = ["brand", "enumber", "haId", "name", "type", "vib"]
+  name_override = "washers"
+  tag_keys = ["brand", "enumber", "haId", "name", "type", "vib"]
+  json_string_fields = ["v_door_status", "v_active_status", "v_programs_active_process_phase"]
 ```
